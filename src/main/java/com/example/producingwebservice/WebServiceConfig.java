@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.soap.SoapVersion;
+import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -36,5 +38,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public XsdSchema countriesSchema() {
         return new SimpleXsdSchema(new ClassPathResource("countries.xsd"));
+    }
+
+    // Define a versão do SOAP
+    @Bean
+    public SaajSoapMessageFactory messageFactory() {
+        SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
+        //messageFactory.setSoapVersion(SoapVersion.SOAP_12);
+        messageFactory.setSoapVersion(SoapVersion.SOAP_11);
+        return messageFactory;
     }
 }
