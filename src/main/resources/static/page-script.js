@@ -1,28 +1,65 @@
-const codeBodyDOM = document.querySelector("#code");
+//// VARIABLES / CONSTANTS ////
 
-const editor = CodeMirror.fromTextArea(codeBodyDOM, {
+const initCodeRequest = `
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://example.com/contrato">
+  <soapenv:Header/>
+  <soapenv:Body>
+      <gs:getCountryRequest>
+          <gs:name>Spain</gs:name>
+      </gs:getCountryRequest>
+  </soapenv:Body>
+</soapenv:Envelope>
+`.trim();
+
+const codeRequestDOM = document.querySelector("#code-request");
+const codeResponseDOM = document.querySelector("#code-response");
+
+const editorRequest = CodeMirror.fromTextArea(codeRequestDOM, {
   lineNumbers: true,
-  theme: "monokai",
-  mode: "text/html"
+  mode: "text/html",
+  viewportMargin: Infinity
+});
+
+const editorResponse = CodeMirror.fromTextArea(codeResponseDOM, {
+  lineNumbers: true,
+  mode: "text/html",
+  readOnly: "nocursor", //ou true
+  viewportMargin: Infinity
 });
 
 
-const formBody = document.querySelector("#form-body");
+//// INITIALIZE ////
 
-formBody.addEventListener("submit", function (event) {
+// highlight.js
+hljs.initHighlightingOnLoad();
+//hljs.initLineNumbersOnLoad();
+
+editorRequest.setValue(initCodeRequest);
+editorRequest.save();
+
+document.querySelector("#form-request-body").addEventListener("submit", function (event) {
   event.preventDefault()
-  const body = codeBodyDOM.value;
-  console.log(body)
-  
+  const body = codeRequestDOM.value;
   sendSoapRequest(body);
 });
 
-////////
+//// FUNCTIONS ////
 
-function sendSoapRequest(data) {
+async function sendSoapRequest(data) {
+
+  const setReponseInDOM = function (request) {
+    const requestURIDOM = document.querySelector("#request-uri");
+    const requestHeadersDOM = document.querySelector("#request-headers");
+    const responseHeadersDOM = document.querySelector("#response-headers");
+    
+    requestURIDOM.innerText = `${request.config.method.toUpperCase()} ${request.config.url}`;
+    requestHeadersDOM.innerText = JSON.stringify(request.config.headers);
+    responseHeadersDOM.innerText = JSON.stringify(request.headers);
+  };
+
   const config = {
     method: 'post',
-    url: 'http://192.168.2.104:8080/ws',
+    url: '/ws',
     headers: { 
       // 'Content-Type': 'application/soap+xml; charset=utf-8'
       'Content-Type': 'text/xml'
@@ -30,14 +67,25 @@ function sendSoapRequest(data) {
     data : data
   };
 
-  axios(config)
-  .then(function (response) {
-    console.log(response);
-    console.log(formatXml(response.data))
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  try {
+    const response = await axios(config);
+    editorResponse.setValue(formatXml(response.data));
+    setReponseInDOM(response);
+    editorResponse.save()
+  } catch (error) {
+    if (!error.response) {
+      console.error('Network Error')
+      return;
+    }
+
+    const errorCode = error.response.status
+    const errorMessage = error.response.data.message || error.message
+    editorResponse.setValue(`${errorCode} - ${errorMessage}`)
+    editorResponse.save()
+    setReponseInDOM(error.response);
+  }
+
+  document.querySelector('#container-soap-request').scrollIntoView();
 }
 
 function formatXml(xml) {

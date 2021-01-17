@@ -3,30 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Spring Web Service SOAP - Ferramentas</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
   <link rel="stylesheet" href="vendor/codemirror-5.59.1/lib/codemirror.css">
-  <link rel="stylesheet" href="vendor/codemirror-5.59.1/theme/monokai.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.6.0/dist/highlightjs-line-numbers.min.js"></script> -->
   <script src="vendor/codemirror-5.59.1/lib/codemirror.js"></script>
   <script src="vendor/codemirror-5.59.1/mode/xml/xml.js"></script>
   <script src="vendor/axios.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>XML mode</h2>
+  <div class="wrapper">
+    <div class="text-center"><h1>Spring Web Service SOAP</h1></div>
 
-  <form id="form-body">
-    <textarea id="code" name="code">
+    <div class="container">
+      <p>Visualizar WSDL: <a href="/ws/countries.wsdl" download="countries.wsdl.xml" target="_blank">/ws/countries.wsdl</a></p>
+    </div>
+
+    <div class="container">
+      <div class="pb-10"><h3>CountriesPortService</h3></div>
+      <h4 class="pb-10">SOAP 1.1</h4>
+      <p class="pb-10">
+        A seguir está um exemplo de solicitação e resposta SOAP 1.1.
+        Os marcadores de posição mostrados precisam ser substituídos por valores reais.
+        Países disponíveis: Spain, Poland e United Kingdom
+      </p>
+      <p class="pb-10">Solicitação: </p>
+      <pre class="pb-10"><code class="language-xml">POST /ws HTTP/1.1
+Host: host:port
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
 &lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:gs=&quot;http://example.com/contrato&quot;&gt;
   &lt;soapenv:Header/&gt;
   &lt;soapenv:Body&gt;
       &lt;gs:getCountryRequest&gt;
-          &lt;gs:name&gt;Spain&lt;/gs:name&gt;
+          &lt;gs:name&gt;string&lt;/gs:name&gt;
       &lt;/gs:getCountryRequest&gt;
   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;
-    </textarea>
-    <input type="submit" value="Ok">
-  </form>
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+      <p class="pb-10">Resposta:</p>
+      <pre><code class="language-xml">HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;SOAP-ENV:Header/&gt;
+    &lt;SOAP-ENV:Body&gt;
+        &lt;ns2:getCountryResponse xmlns:ns2=&quot;http://example.com/contrato&quot;&gt;
+            &lt;ns2:country&gt;
+                &lt;ns2:name&gt;string&lt;/ns2:name&gt;
+                &lt;ns2:population&gt;number&lt;/ns2:population&gt;
+                &lt;ns2:capital&gt;string&lt;/ns2:capital&gt;
+                &lt;ns2:currency&gt;string&lt;/ns2:currency&gt;
+            &lt;/ns2:country&gt;
+        &lt;/ns2:getCountryResponse&gt;
+    &lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;</code></pre>
+    </div>
+
+    <div>
+      <div class="text-center"><h1>SOAP - Teste Online</h1></div>
+    </div>
+  
+    <div class="container">
+      <div class="pb-10"><h3 class="display-inline-block">SOAP Message:&nbsp;</h3><i>(Edite a mensagem)</i></div>
+
+      <form id="form-request-body">
+        <textarea id="code-request" name="code"></textarea>
+        <input type="submit" value="Enviar Requisição" class="submit-button">
+      </form>
+    </div>
+
+    <div class="container" id="container-soap-request">
+      <h3 class="pb-10">SOAP Request:</h3>
+      <div class="pb-10">URI: <span id="request-uri"><i>Aguardando requisição...</i></span></div>
+      <div class="pb-10">Headers: <span id="request-headers"><i>Aguardando requisição...</i></span></div>
+    </div>
+  
+    <div class="container">
+      <h3 class="pb-10">SOAP Response:</h3>
+      <div class="pb-10">Headers: <span id="response-headers">Aguardando requisição...</span></div>
+      <form id="form-response">
+        <textarea id="code-response">Aguardando requisição...</textarea>
+      </form>
+    </div>
+
+    <div>
+      <div class="text-center"><h1>Ferramentas / Referências</h1></div>
+    </div>
+
+    <div class="container">
+      <ul>
+        <li><a href="https://spring.io/guides/gs/producing-web-service/" target="_blank">Getting Started | Producing a SOAP web service</a></li>
+        <li><a href="https://tomi.vanek.sk/" target="_blank">WSDL viewer</a></li>
+        <li><a href="https://www.wsdl-analyzer.com/" target="_blank">Online WSDL Viewer and Validator</a></li>
+        <li><a href="http://www.soapclient.com/soaptest.html" target="_blank">Generic SOAP Client</a></li>
+      </ul>        
+    </div>
+
+    <footer class="text-center">
+      <p>Spring Web Service SOAP</p>
+      <p>Por: Guilherme Rodrigues - GitHub: guilhermerodrigues680</p>
+    </footer>
+  </div>
 
   <script src="page-script.js"></script>
 </body>
