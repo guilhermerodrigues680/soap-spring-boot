@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### LOGS ###
+/logs/*
+!/logs/.gitkeep
+
 ### STS ###
 .apt_generated
 .classpath

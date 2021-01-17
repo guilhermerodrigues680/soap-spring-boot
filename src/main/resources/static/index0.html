@@ -1,0 +1,236 @@
+<html xmlns:wso="http://www.dataaccess.com/schemas/WebServiceMetaData">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+          function submitTestFormWithJSONOutput()
+          {
+            var oldAction=document.testForm.action;
+            document.testForm.action+="/JSON/debug";
+            document.testForm.method="GET";
+            document.testForm.submit();
+            document.testForm.action=oldAction;
+            document.testForm.method="POST";
+          }
+        </script>
+    <style type="text/css">
+                    body
+                    {
+                        margin-left: 2em;
+                        font-size: 10pt;
+                        font-family: "Segoe UI";
+                    }                
+                    h1
+                    {
+                        margin-left: -0.8em;
+
+                    }                
+                    h2
+                    {
+                        margin-left: -0.8em;
+                        border-top: 1px solid #000000;
+                        padding-top: 0.4em;
+                        font-size: 13pt;
+                        font-family: "Segoe UI";
+                        color: #e54711;
+                    }                
+                    h3
+                    {
+                        margin-left: -0.8em;
+                        font-weight: bold;
+                        font-size: 11pt;
+                        font-family: "Segoe UI";
+                    }                
+                    .title
+                    {
+                        margin-left: -0.8em;
+                        color: #ffffff;
+                        font-size: 1.7em;
+                        background-color: #e54711;
+                        font-family: "Segoe UI";
+                        padding-top: 0.3em;
+                        padding-bottom: 0.3em;
+                    } 
+                    .intro
+                    {
+                        margin-left: -0.8em;
+                    }
+                    .frmheader
+                    {
+                        background: #e54711;
+                        color: #ffffff;
+                        padding-top: 0.1em;
+                        padding-bottom: 0.2em;
+                        font-size: 10pt;
+                    }
+                    .code
+                    {
+                        font-family: 'Courier New';
+                        background-color: #ffeae5;
+                        padding: 0.3em;
+                        font-size: 10pt;
+                    }
+                    font.value
+                    {
+
+                        font: bold;
+                        font-size: 10pt;
+                    }
+                    font.key
+                    {
+
+                        font: bold;
+                        font-size: 10pt;
+                    }
+                    a {
+                	color: #e54711;
+                    }
+                    a:hover {
+                	color: #000000;
+                    }
+                    td
+                    {
+                        font-size: 9pt;
+                    }
+                </style>
+    <title>Text Casing Service</title>
+  </head>
+  <body>
+    <center>
+      <p class="title">Text Casing Service</p>
+    </center>
+    <p class="intro">Click
+          <a href="/webservicesserver/TextCasing.wso">here</a>
+                    for a complete list of operations.
+        </p>
+    <h2>InvertCaseFirstAdjustStringToPrevious</h2>Invert the casing of the first letter and adjust the string to conform with the previous casing of first letter.<h3>Test</h3>
+        To test the operation using the HTTP POST protocol, click the 'Invoke' button.
+        <form name="testForm" id="testForm" target="_blank" action="/webservicesserver/TextCasing.wso/InvertCaseFirstAdjustStringToPrevious" method="POST">
+      <table frame="box" cellspacing="0" cellpadding="4" style="border-collapse: collapse;" rules="none">
+        <tr>
+          <td class="frmheader" style="border-right: 2px solid white;">Parameter</td><td class="frmheader">Value</td>
+        </tr>
+        <tr>
+          <td>sAString</td><td><input type="text" size="50" name="sAString"><i></i></td>
+        </tr>
+        <tr>
+          <td></td><td align="right"><input type="submit" value="Invoke" class="button"></td>
+        </tr>
+        <tr>
+          <td></td><td align="right">
+            To view the output in JSON format, <a href="javascript:submitTestFormWithJSONOutput();">click here</a>.
+          </td>
+        </tr>
+      </table>
+    </form>
+    <h3>SOAP 1.1</h3>
+    The following is a sample SOAP 1.1 request and response. The <font class="value">placeholders</font> shown need to be replaced with actual values.<br>
+    <br>
+    <div class="code">
+        POST /webservicesserver/TextCasing.wso HTTP/1.1<br>
+        Host: www.dataaccess.com<br>
+        Content-Type: text/xml; charset=utf-8<br>
+        Content-Length: <font class="value">length</font>
+      <br>
+      <br>
+        &lt;?xml version="1.0" encoding="utf-8"?&gt;<br>
+        &lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;<br>
+        &nbsp;&nbsp;&lt;soap:Body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPrevious xmlns="http://www.dataaccess.com/webservicesserver/"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sAString&gt;<font class="value">string</font>&lt;/sAString&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/InvertCaseFirstAdjustStringToPrevious&gt;<br>
+        &nbsp;&nbsp;&lt;/soap:Body&gt;<br>
+        &lt;/soap:Envelope&gt;<br>
+    </div>
+    <br>
+    <div class="code">
+        HTTP/1.1 200 OK<br>
+        Content-Type: text/xml; charset=utf-8<br>
+        Content-Length: <font class="value">length</font>
+      <br>
+      <br>
+        &lt;?xml version="1.0" encoding="utf-8"?&gt;<br>
+        &lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;<br>
+        &nbsp;&nbsp;&lt;soap:Body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPreviousResponse xmlns="http://www.dataaccess.com/webservicesserver/"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPreviousResult&gt;<font class="value">string</font>&lt;/InvertCaseFirstAdjustStringToPreviousResult&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/InvertCaseFirstAdjustStringToPreviousResponse&gt;<br>
+        &nbsp;&nbsp;&lt;/soap:Body&gt;<br>
+        &lt;/soap:Envelope&gt;<br>
+    </div>
+    <h3>SOAP 1.2</h3>
+    The following is a sample SOAP 1.2 request and response. The <font class="value">placeholders</font> shown need to be replaced with actual values.<br>
+    <br>
+    <div class="code">
+        POST /webservicesserver/TextCasing.wso HTTP/1.1<br>
+        Host: www.dataaccess.com<br>
+        Content-Type: application/soap+xml; charset=utf-8<br>
+        Content-Length: <font class="value">length</font>
+      <br>
+      <br>
+        &lt;?xml version="1.0" encoding="utf-8"?&gt;<br>
+        &lt;soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;<br>
+        &nbsp;&nbsp;&lt;soap12:Body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPrevious xmlns="http://www.dataaccess.com/webservicesserver/"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sAString&gt;<font class="value">string</font>&lt;/sAString&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/InvertCaseFirstAdjustStringToPrevious&gt;<br>
+        &nbsp;&nbsp;&lt;/soap12:Body&gt;<br>
+        &lt;/soap12:Envelope&gt;<br>
+    </div>
+    <br>
+    <div class="code">
+        HTTP/1.1 200 OK<br>
+        Content-Type: application/soap+xml; charset=utf-8<br>
+        Content-Length: <font class="value">length</font>
+      <br>
+      <br>
+        &lt;?xml version="1.0" encoding="utf-8"?&gt;<br>
+        &lt;soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;<br>
+        &nbsp;&nbsp;&lt;soap12:Body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPreviousResponse xmlns="http://www.dataaccess.com/webservicesserver/"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;InvertCaseFirstAdjustStringToPreviousResult&gt;<font class="value">string</font>&lt;/InvertCaseFirstAdjustStringToPreviousResult&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/InvertCaseFirstAdjustStringToPreviousResponse&gt;<br>
+        &nbsp;&nbsp;&lt;/soap12:Body&gt;<br>
+        &lt;/soap12:Envelope&gt;<br>
+    </div>
+    <h3>JSON</h3>
+
+       The following is a sample JSON request and response. The <font class="value">placeholders</font> shown need to be replaced with actual values.<br>
+    <br>
+    <div class="code">
+			POST /webservicesserver/TextCasing.wso HTTP/1.1<br>
+			Host: www.dataaccess.com<br>
+			Content-Type: application/json; charset=utf-8<br>
+			Content-Length: <font class="value">length</font>
+      <br>{<br>&nbsp;&nbsp;
+    "sAString":
+    <font class="value">string</font>
+      <br>}</div>
+    <br>
+    <div class="code">
+          HTTP/1.1 200 OK<br>
+          Content-Type: application/json; charset=utf-8<br>
+          Content-Length: <font class="value">length</font>
+      <br>
+      
+      <font class="value">string</font>
+    </div>
+
+    <br>
+
+    <div class="code">
+        <code >
+            <pre>
+POST /ws HTTP/1.1
+Host: localhost:8080
+Content-Type: application/soap+xml; charset=utf-8
+Content-Length: 288
+
+&lt;soap12:Envelope xmlns:soap12=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:gs=&quot;http://example.com/contrato&quot;&gt;
+    &lt;soap12:Header/&gt;
+    &lt;soap12:Body&gt;
+        &lt;gs:getCountryRequest&gt;
+            &lt;gs:name&gt;Spain&lt;/gs:name&gt;
+        &lt;/gs:getCountryRequest&gt;
+    &lt;/soap12:Body&gt;
+&lt;/soap12:Envelope&gt;
+            </pre>
+        </code>
+    </div>
+  </body>
+</html>
