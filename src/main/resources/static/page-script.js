@@ -22,7 +22,7 @@ formBody.addEventListener("submit", function (event) {
 function sendSoapRequest(data) {
   const config = {
     method: 'post',
-    url: 'http://localhost:8080/ws',
+    url: 'http://192.168.2.104:8080/ws',
     headers: { 
       // 'Content-Type': 'application/soap+xml; charset=utf-8'
       'Content-Type': 'text/xml'

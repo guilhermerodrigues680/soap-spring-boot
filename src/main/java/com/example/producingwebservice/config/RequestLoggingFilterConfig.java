@@ -17,7 +17,7 @@ public class RequestLoggingFilterConfig {
         filter.setMaxPayloadLength(10000);
         filter.setBeforeMessagePrefix("Request    : [");
         filter.setBeforeMessageSuffix("]");
-        filter.setAfterMessagePrefix("Request end: [");
+        filter.setAfterMessagePrefix("Request end: [\n");
         filter.setAfterMessageSuffix("]");
 
         return filter;
